@@ -2,11 +2,11 @@
 
 新增系统环境变量，mysql启动需要用到；
 
-![image-20221110141736999](image/image-20221110141736999.png)
+![image-20221110141736999](https://gitee.com/letefly/NoteImages/raw/master/img/image-20221110141736999.png)
 
 新增path环境变量，通过终端控制的时候需要用到；
 
-![image-20221110142055620](image/image-20221110142055620.png)
+![image-20221110142055620](https://gitee.com/letefly/NoteImages/raw/master/img/image-20221110142055620.png)
 
 ## 常用命令
 

@@ -1,6 +1,6 @@
 ## Docker简介
 
-![img](image/docker01.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/docker01.png)
 
 > Docker 是一个开源的应用容器引擎，基于 [Go 语言](https://www.runoob.com/go/go-tutorial.html) 并遵从 Apache2.0 协议开源。
 >
@@ -58,7 +58,7 @@ Docker 实质上是在已经运行的 Linux 下制造了一个隔离的文件环
 
 因此，Docker 必须部署在 Linux 内核的系统上。如果其他系统想部署 Docker 就必须安装一个虚拟 Linux 环境。
 
-![img](image/CV09QJMI2fb7L2k0.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/CV09QJMI2fb7L2k0.png)
 
 在 Windows 上部署 Docker 的方法都是先安装一个虚拟机，并在安装 Linux 系统的的虚拟机中运行 Docker。
 
@@ -78,19 +78,19 @@ Hyper-V 是微软开发的虚拟机，类似于 VMWare 或 VirtualBox，仅适�
 
 #### 开启 Hyper-V
 
-![img](image/1513668234-4363-20171206211136409-1609350099.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/1513668234-4363-20171206211136409-1609350099.png)
 
 程序和功能
 
-![img](image/1513668234-4368-20171206211345066-1430601107.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/1513668234-4368-20171206211345066-1430601107.png)
 
 启用或关闭Windows功能
 
-![img](image/1513668234-9748-20171206211435534-1499766232.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/1513668234-9748-20171206211435534-1499766232.png)
 
 xxxxxxxxxx *// babel.config.js:* module.exports = {        compact: false,  }js
 
-![img](image/1513668234-6433-20171206211858191-1177002365.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/1513668234-6433-20171206211858191-1177002365.png)
 
 也可以通过命令来启用 Hyper-V ，请右键开始菜单并以管理员身份运行 PowerShell，执行以下命令：
 
@@ -102,17 +102,17 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
 
 点击 [Get started with Docker Desktop](https://hub.docker.com/?overlay=onboarding)，并下载 Windows 的版本，如果你还没有登录，会要求注册登录：
 
-![img](image/5AEB69DA-6912-4B08-BE79-293FBE659894.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/5AEB69DA-6912-4B08-BE79-293FBE659894.png)
 
 #### 运行安装文件
 
 双击下载的 Docker for Windows Installer 安装文件，一路 Next，点击 Finish 完成安装。
 
-![img](image/1513669129-6146-20171206214940331-1428569749.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/1513669129-6146-20171206214940331-1428569749.png)
 
-![img](image/1513668903-9668-20171206220321613-1349447293.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/1513668903-9668-20171206220321613-1349447293.png)
 
-安装完成后，Docker 会自动启动。通知栏上会出现个小鲸鱼的图标![img](image/1513582421-4552-whale-x-win.png)，这表示 Docker 正在运行。
+安装完成后，Docker 会自动启动。通知栏上会出现个小鲸鱼的图标![img](https://gitee.com/letefly/NoteImages/raw/master/img/1513582421-4552-whale-x-win.png)，这表示 Docker 正在运行。
 
 桌边也会出现三个图标，如下图所示：
 
@@ -120,11 +120,11 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
 
 如果没启动，你可以在 Windows 搜索 Docker 来启动：
 
-![img](image/1513585082-6751-docker-app-search.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/1513585082-6751-docker-app-search.png)
 
 启动后，也可以在通知栏上看到小鲸鱼图标：
 
-![img](image/1513585123-3777-whale-taskbar-circle.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/1513585123-3777-whale-taskbar-circle.png)
 
 > 如果启动中遇到因 WSL 2 导致地错误，请安装 [WSL 2](https://docs.microsoft.com/zh-cn/windows/wsl/install-win10)。
 
@@ -136,7 +136,7 @@ docker run hello-world
 
 在成功运行之后应该会出现以下信息：
 
-![img](image/EmkOezweLQVIwA1T__original.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/EmkOezweLQVIwA1T__original.png)
 
 ### CentOS7 Docker离线安装
 
@@ -387,17 +387,17 @@ docker logs -f --tail=500 <CANTAINER>
 
 ### Hardware assisted virtualization and data execution protection must be enabled in the BIOS
 
-![image-20221107174503060](image/image-20221107174503060.png)
+![image-20221107174503060](https://gitee.com/letefly/NoteImages/raw/master/img/image-20221107174503060.png)
 
 win10安装docker时报错Hardware assisted virtualization and data execution protection must be enabled in the BIOS，这就很奇怪了，明明是在blos已经启用了虚拟硬件了，怎么还会报错呢？
 
 1. 确认CPU是否开启虚拟化，如果没有要进入BIOS开启
 
-![image-20221107174617164](image/image-20221107174617164.png)
+![image-20221107174617164](https://gitee.com/letefly/NoteImages/raw/master/img/image-20221107174617164.png)
 
 2. 打开windows的【启用或关闭windows功能】，查看是否安装Hyper-V,没选的勾选
 
-![image-20221107174816813](image/image-20221107174816813.png)
+![image-20221107174816813](https://gitee.com/letefly/NoteImages/raw/master/img/image-20221107174816813.png)
 
 3.执行一下命令并重启
 

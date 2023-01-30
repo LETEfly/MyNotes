@@ -24,7 +24,7 @@ NoSQL用于超大规模数据的存储。（例如谷歌或FaceinfoAnalysis每�
 
 今天我们可以通过第三方平台（如：Google,Facebook等）可以很容易的访问和抓取数据。用户的个人信息，社交网络，地理位置，用户生成的数据和用户操作日志已经成倍的增加。我们如果要对这些用户数据进行挖掘，那SQL数据库已经不适合这些应用了, NoSQL 数据库的发展却能很好的处理这些大的数据。
 
-![img](\image\web-data-image.png)
+![web-data-image](https://gitee.com/letefly/NoteImages/raw/master/img/web-data-image.png)
 
 ---
 
@@ -48,7 +48,7 @@ NoSQL用于超大规模数据的存储。（例如谷歌或FaceinfoAnalysis每�
 \- CAP定理
 \- 高性能，高可用性和可伸缩性
 
-![img](\image\bigdata.png)
+![bigdata](https://gitee.com/letefly/NoteImages/raw/master/img/bigdata.png)
 
 ---
 
@@ -70,7 +70,7 @@ CAP理论的核心是：一个分布式系统不可能同时很好的满足一�
 
 - AP - 满足可用性，分区容忍性的系统，通常可能对一致性要求低一些。
 
-  ![img](\image\cap-theoram-image.png)
+  ![$R7ZOJPK](https://gitee.com/letefly/NoteImages/raw/master/img/$R7ZOJPK.png)
 
 ---
 
@@ -117,7 +117,7 @@ MongoDB 旨在为WEB应用提供可扩展的高性能数据存储解决方案。
 
 MongoDB 将数据存储为一个文档，数据结构由键值(key=>value)对组成。MongoDB 文档类似于 JSON 对象。字段值可以包含其他文档，数组及文档数组。
 
-![img](\image\crud-annotated-document.png)
+![$RR6I0QD](https://gitee.com/letefly/NoteImages/raw/master/img/$RR6I0QD.png)
 
 ---
 
@@ -197,19 +197,19 @@ Gangila是MongoDB高性能的系统监视的工具，它作为一个插件应用
 
 MongoDB 提供了可用于 32 位和 64 位系统的预编译二进制包，你可以从MongoDB官网下载安装，MongoDB 预编译二进制包下载地址：https://www.mongodb.com/download-center/community
 
-![image-20211111134348492](\image\image-20211111134348492.png)
+![$R3LK6ZV](https://gitee.com/letefly/NoteImages/raw/master/img/$R3LK6ZV.png)
 
 下载 .msi 文件，下载后双击该文件，按操作提示安装即可。
 
 安装过程中，你可以通过点击 "Custom(自定义)" 按钮来设置你的安装目录。
 
-![image-20211111135303795](\image\image-20211111135303795.png)
+![$R9NKP8N](https://gitee.com/letefly/NoteImages/raw/master/img/$R9NKP8N.png)
 
-![image-20211111135402603](\image\image-20211111135402603.png)
+![image-20211111135402603](https://gitee.com/letefly/NoteImages/raw/master/img/image-20211111135402603.png)
 
 下一步安装 **"install mongoDB compass"** 不勾选（当然你也可以选择安装它，可能需要更久的安装时间），MongoDB Compass 是一个图形界面管理工具，我们可以在后面自己到官网下载安装，下载地址：https://www.mongodb.com/download-center/compass。
 
-![image-20211111135533852](\image\image-20211111135533852.png)
+![image-20211111135533852](https://gitee.com/letefly/NoteImages/raw/master/img/image-20211111135533852.png)
 
 ---
 
@@ -286,7 +286,7 @@ WriteResult({ "nInserted" : 1 })
 
 通过下图实例，我们也可以更直观的了解Mongo中的一些概念：
 
-![img](\image\Figure-1-Mapping-Table-to-Collection-1.png)
+![Figure-1-Mapping-Table-to-Collection-1](https://gitee.com/letefly/NoteImages/raw/master/img/Figure-1-Mapping-Table-to-Collection-1.png)
 
 ## 数据库（Datebase）
 
@@ -464,7 +464,7 @@ ObjectId 类似唯一主键，可以很快的去生成和排序，包含 12 byte
 - 紧接的两个字节由进程 id 组成 PID
 - 最后三个字节是随机数
 
-![img](\image\2875754375-5a19268f0fd9b_articlex.jpeg)
+![2875754375-5a19268f0fd9b_articlex](https://gitee.com/letefly/NoteImages/raw/master/img/2875754375-5a19268f0fd9b_articlex.jpeg)
 
 MongoDB 中存储的文档必须有一个 _id 键。这个键的值可以是任何类型的，默认是个 ObjectId 对象
 

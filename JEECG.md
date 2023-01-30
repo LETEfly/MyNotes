@@ -1,6 +1,6 @@
 # 项目介绍
 
-![img](image/af0485846415e234da7aaa3f9328070c_682x318.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/af0485846415e234da7aaa3f9328070c_682x318.png)
 
 `JeecgBoot` 是一款基于代码生成器的`低代码`开发平台，零代码开发！采用前后端分离架构：SpringBoot2.x，Ant Design&Vue，Mybatis-plus，Shiro，JWT。强大的代码生成器让前后端代码一键生成，无需写任何代码! JeecgBoot引领新的开发模式(Online Coding模式-> 代码生成器模式-> 手工MERGE智能开发)， 帮助解决Java项目70%的重复工作，让开发更多关注业务逻辑。既能快速提高开发效率，帮助公司节省成本，同时又不失灵活性！JeecgBoot还独创在线开发模式（No代码概念）：在线表单配置（表单设计器）、移动配置能力、工作流配置（在线设计流程）、报表配置能力、在线图表配置、插件能力（可插拔）等等！
 
@@ -174,11 +174,11 @@ yarn config set disturl https://npm.taobao.org/dist --global
 
 ### 前端Webstorm开发界面
 
-![输入图片说明](image/07163141_8U71.png)
+![输入图片说明](https://gitee.com/letefly/NoteImages/raw/master/img/07163141_8U71.png)
 
 ### 后端Eclipse开发界面
 
-![输入图片说明](image/07163150_Oeie.png)
+![输入图片说明](https://gitee.com/letefly/NoteImages/raw/master/img/07163150_Oeie.png)
 
 ## 开发环境搭建
 
@@ -196,13 +196,13 @@ yarn config set disturl https://npm.taobao.org/dist --global
 
 （1）前端工程ant-design-jeecg-vue
 （2）Webstrom打开项目
-![输入图片说明](image/14220126_qkgS.png)
+![输入图片说明](https://gitee.com/letefly/NoteImages/raw/master/img/14220126_qkgS.png)
 
 **3、本地开发构建运行**
 
 （1）执行命令 yarn install 下载项目依赖
-![输入图片说明](image/14220404_newr.png)
-（2）项目依赖的模块下载完成，则项目构建完成
+![输入图片说明](https://gitee.com/letefly/NoteImages/raw/master/img/14220404_newr.png)
+（2)项目依赖的模块下载完成，则项目构建完成
 
 ###  后端开发环境搭建
 
@@ -224,7 +224,7 @@ yarn config set disturl https://npm.taobao.org/dist --global
 
 **（3）使用Idea或者Eclipse通过Maven方式导入项目**
 
-![输入图片说明](image/30121701_2mDO.png)
+![输入图片说明](https://gitee.com/letefly/NoteImages/raw/master/img/30121701_2mDO.png)
 重新导入项目后，maven会自动下载项目依赖，至此后台项目环境搭建完成
 
 ## 如何启动项目
@@ -255,10 +255,12 @@ yarn config set disturl https://npm.taobao.org/dist --global
 ```
 
 a. 数据库配置(连接和账号密码)
-![img](image/41c5cb94f0a9f556e743a353fd038a5e_1472x343.png)
+
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/41c5cb94f0a9f556e743a353fd038a5e_1472x343.png)
 
 b. Redis配置（配置redis的host和port）
-![img](image/d9e1d242134ae1a6679d524b2d948a6f_1089x395.png)
+
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/d9e1d242134ae1a6679d524b2d948a6f_1089x395.png)
 
 #### （3）启动redis服务
 
@@ -277,7 +279,8 @@ b. Redis配置（配置redis的host和port）
 #### （1）执行命令下载依赖
 
 执行命令 yarn install
-![img](image/fed2303e37a6cd123f3e2cf85f48e63d_731x710.png)
+
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/fed2303e37a6cd123f3e2cf85f48e63d_731x710.png)
 
 #### （2）配置后台接口
 
@@ -293,19 +296,19 @@ VUE_APP_ONLINE_BASE_URL=http://fileview.jeecg.com/onlinePreview
 
 ~~\* b. vue.config.js（开发环境配置，此步骤可忽略）~~
 此处映射地址配置到后台端口即可，如果后台项目名字修改了的话，直接改“/jeecg-boot”
-![img](image/e01a3f917932264d165a95d0bd50b42c_562x351.png)
+
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/e01a3f917932264d165a95d0bd50b42c_562x351.png)
 
 #### （3）启动项目
 
 调出Show npm Scripts 功能
 找到项目目录下文件package.json文件，鼠标右键选择Show npm Scripts
-![输入图片说明](image/30121009_NDhQ.png)
+![输入图片说明](https://gitee.com/letefly/NoteImages/raw/master/img/30121009_NDhQ.png)
 
 点击命令 serve 启动项目
 看到如下日志 则启动成功
 
-![输入图片说明](image/30150342_nREr.png)
-通过 [http://localhost:3000](http://localhost:3000/) 访问前端项目，默认账号密码： admin/123456
+![输入图片说明](https://gitee.com/letefly/NoteImages/raw/master/img/30150342_nREr.png)通过 [http://localhost:3000](http://localhost:3000/) 访问前端项目，默认账号密码： admin/123456
 
 ## 平台技术点
 
@@ -427,7 +430,7 @@ quartz:
 
 #### 2.4 sqlserver下启动后，如果控制台一直滚动如下图信息
 
-![img](image/be873f33063df556245b47d3d248d469_1890x473.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/be873f33063df556245b47d3d248d469_1890x473.png)
 可修改配置文件
 
 ```
@@ -435,7 +438,7 @@ web-stat-filter:
        enabled:false
 ```
 
-![img](image/0b0f8771b0bfa379ed63c403c11f2722_236x53.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/0b0f8771b0bfa379ed63c403c11f2722_236x53.png)
 
 #### 2.5 sqlserver启动失败，报错--- 不支持“variant”数据类型
 
@@ -450,9 +453,9 @@ web-stat-filter:
 ```
 
 报错信息：
-![img](image/f3d53ee4cbcb513bfb0747bf85d4f38d_1024x287.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/f3d53ee4cbcb513bfb0747bf85d4f38d_1024x287.png)
 修改依赖jar包：
-![img](image/bb7550c44f9157585c6459d7460eda21_851x332.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bb7550c44f9157585c6459d7460eda21_851x332.png)
 
 ### 3. postgresql数据库
 
@@ -542,7 +545,7 @@ create database `jeecg-boot` default character set utf8mb4 collate utf8mb4_gener
 
 > 自2.4+版开始，前端支持多环境构建，将配置与环境隔离
 > 引入`.env.*`配置文件，根目录新增以下4个环境配置文件
-> ![img](image/0ac171be7b6509945682b10b6d4e5648_210x93.png)
+> ![img](https://gitee.com/letefly/NoteImages/raw/master/img/0ac171be7b6509945682b10b6d4e5648_210x93.png)
 
 ### **配置文件说明**
 
@@ -587,7 +590,7 @@ VUE_APP_ONLINE_BASE_URL=http://fileview.jeecg.com/onlinePreview
 
 如果需要用此配置打包，请点击命令
 
-![img](image/7ef4d90e7d7dd477ee05bc63b703bec8_255x218.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/7ef4d90e7d7dd477ee05bc63b703bec8_255x218.png)
 
 ## Docker中安装Elasticsearch
 

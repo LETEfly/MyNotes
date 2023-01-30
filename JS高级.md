@@ -325,13 +325,13 @@ JavaScript 不是类型语言。与许多其他编程语言不同，JavaScript �
 
 此格式用 64 位存储数值，其中 0 到 51 存储数字（片段），52 到 62 存储指数，63 位存储符号：
 
-![img](image/490px-General_floating_point_frac.svg.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/490px-General_floating_point_frac.svg.png)
 
 | 值 (aka Fraction/Mantissa) | 指数（Exponent）  | 符号（Sign） |
 | :------------------------- | :---------------- | :----------- |
 | 52 bits (0 - 51)           | 11 bits (52 - 62) | 1 bit (63)   |
 
-![img](image/Float_mantissa_exponent.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/Float_mantissa_exponent.png)
 
 ## 精度
 

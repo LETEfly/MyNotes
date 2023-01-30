@@ -77,9 +77,9 @@ module.exports = {
 
 以下一个错误可以看到错误的地方应该是在./node_modules/vue-contextmenujs/src/index.js里面，那就可以确定vue-contextmenujs存在兼容性问题，所以这时候就需要将其加入到transpileDependencies里面去了。
 
-![image-20220711184753599](.\image\image-20220711184753599.png)
+![image-20220711184753599](https://gitee.com/letefly/NoteImages/raw/master/img/image-20220711184753599.png)
 
-![image-20220711184854899](.\image\image-20220711184854899.png)
+![image-20220711184854899](https://gitee.com/letefly/NoteImages/raw/master/img/image-20220711184854899.png)
 
 ```js
 transpileDependencies: ['element-ui', 'echarts','vue-contextmenujs','devextreme','@devextreme'],
@@ -91,11 +91,9 @@ transpileDependencies: ['element-ui', 'echarts','vue-contextmenujs','devextreme'
 
 以下错误就是主要代码里面导致的错误，找到具体那一份代码后可以看到确实如报错所描述的一样，el-table标签的stripe属性定义了两次，所以去掉一个就可以。这在当前的Chrome、Firefox等其它浏览器中是不会报错的，但是在IE11上就会了。
 
-![微信截图_20220711160839](image/微信截图_20220711160839.png
+![微信截图_20220711160839](https://gitee.com/letefly/NoteImages/raw/master/img/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220711160839.png)
 
-![微信截图_20220711160839](image/微信截图_20220711160839.png)
-
-![image-20220712103116036](image/image-20220712103116036.png)
+![image-20220712103116036](https://gitee.com/letefly/NoteImages/raw/master/img/image-20220712103116036.png)
 
 ### 样式问题
 
@@ -156,7 +154,7 @@ SCRIPT5022: SecurityError sockjs.js (1683,3)
 
 遇到以下报错可能是更改的代码还没更新，重启浏览器或者刷新页面
 
-![image-20220711160601463](.\image\image-20220711160601463.png)
+![image-20220711160601463](https://gitee.com/letefly/NoteImages/raw/master/img/image-20220711160601463.png)
 
 ## 总结
 

@@ -37,21 +37,21 @@ D:\Server\Apache24\bin>httpd.exe -k install -n "Apache24"
 
 taskkill /?打开帮助
 
-![img](image/041124459273609.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img//041124459273609.png)
 
 ### cmd窗口中文乱码
 
 在CMD窗口右键/默认值，打开属性选择 “默认代码页为简体中文GBK”，
 
-![img](image/041124490143835.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img//041124490143835.png)
 
 ### 获取命令帮助 xxx /?
 
 遇到记不清楚的命令，但记得名字，就可以键入 命令名 空格 /?就会有详细的该命令的帮助了，比如：ping /?     cd /?
 
-![img](image/041124501643148.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img//041124501643148.png)
 
-![img](image/041124510314248.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img//041124510314248.png)
 
 ## 查看内置命令的帮助信息
 

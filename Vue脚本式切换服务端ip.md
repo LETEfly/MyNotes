@@ -160,7 +160,4 @@ inquirer.prompt(promptList).then(answers => {
 
 ## 2.3 使用
 
-当我们在命令行中输入`npm run server:ip`时效果大致如下，我们可以移动选择我们要连接的后端服务器地址：
-
-![20200622170659.png](https://gitee.com/GitWuJun/MyPicBed/raw/master/images/20200622170659.png)
-
+当我们在命令行中输入`npm run server:ip`时效果大致如下，我们可以移动选择我们要连接的后端服务器地址

@@ -4,15 +4,15 @@
 
 网页布局（layout）是 CSS 的一个重点应用。
 
-![img](image/bg2015071001.gif)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071001.gif)
 
 布局的传统解决方案，基于[盒状模型](https://developer.mozilla.org/en-US/docs/Web/CSS/box_model)，依赖 [`display`](https://developer.mozilla.org/en-US/docs/Web/CSS/display) 属性 + [`position`](https://developer.mozilla.org/en-US/docs/Web/CSS/position)属性 + [`float`](https://developer.mozilla.org/en-US/docs/Web/CSS/float)属性。它对于那些特殊布局非常不方便，比如，[垂直居中](https://css-tricks.com/centering-css-complete-guide/)就不容易实现。
 
-![img](image/bg2015071002.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071002.png)
 
 2009年，W3C 提出了一种新的方案----Flex 布局，可以简便、完整、响应式地实现各种页面布局。目前，它已经得到了所有浏览器的支持，这意味着，现在就能很安全地使用这项功能。
 
-![img](image/bg2015071003.jpg)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071003.jpg)
 
 Flex 布局将成为未来布局的首选方案。本文介绍它的语法，[下一篇文章](https://www.ruanyifeng.com/blog/2015/07/flex-examples.html)给出常见布局的 Flex 写法。网友 [JailBreak](http://vgee.cn/) 为本文的所有示例制作了 [Demo](http://static.vgee.cn/static/index.html)，也可以参考。
 
@@ -57,7 +57,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 
 采用 Flex 布局的元素，称为 Flex 容器（flex container），简称"容器"。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称"项目"。
 
-![img](image/bg2015071004.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071004.png)
 
 容器默认存在两根轴：水平的主轴（main axis）和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做`main start`，结束位置叫做`main end`；交叉轴的开始位置叫做`cross start`，结束位置叫做`cross end`。
 
@@ -88,7 +88,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 }
 ```
 
-![img](image/bg2015071005.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071005.png)
 
 它可能有4个值。
 
@@ -103,7 +103,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 
 默认情况下，项目都排在一条线（又称"轴线"）上。`flex-wrap`属性定义，如果一条轴线排不下，如何换行。
 
-![img](image/bg2015071006.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071006.png)
 
 ```css
 .box{
@@ -115,15 +115,15 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 
 （1）`nowrap`（默认）：不换行。
 
-![img](image/bg2015071007.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071007.png)
 
 （2）`wrap`：换行，第一行在上方。
 
-![img](image/bg2015071008.jpg)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071008.jpg)
 
 （3）`wrap-reverse`：换行，第一行在下方。
 
-![img](image/bg2015071009.jpg)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071009.jpg)
 
 ## 3.3 flex-flow
 
@@ -149,7 +149,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 }
 ```
 
-![img](image/bg2015071010.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071010.png)
 
 它可能取5个值，具体对齐方式与轴的方向有关。下面假设主轴为从左到右。
 
@@ -171,7 +171,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 }
 ```
 
-![img](image/bg2015071011.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071011.png)
 
 它可能取5个值。具体的对齐方式与交叉轴的方向有关，下面假设交叉轴从上到下。
 
@@ -193,7 +193,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 }
 ```
 
-![img](image/bg2015071012.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071012.png)
 
 该属性可能取6个值。
 
@@ -229,7 +229,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 }
 ```
 
-![img](image/bg2015071013.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071013.png)
 
 ## 4.2 flex-grow属性
 
@@ -243,7 +243,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 }
 ```
 
-![img](image/bg2015071014.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071014.png)
 
 如果所有项目的`flex-grow`属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的`flex-grow`属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。
 
@@ -259,7 +259,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 }
 ```
 
-![img](image/bg2015071015.jpg)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071015.jpg)
 
 如果所有项目的`flex-shrink`属性都为1，当空间不足时，都将等比例缩小。如果一个项目的`flex-shrink`属性为0，其他项目都为1，则空间不足时，前者不缩小。
 
@@ -307,7 +307,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 }
 ```
 
-![img](image/bg2015071016.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071016.png)
 
 该属性可能取6个值，除了auto，其他都与align-items属性完全一致。
 
@@ -317,11 +317,11 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 
 骰子的一面，最多可以放置9个点。
 
-![img](image/bg2015071328.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071328.png)
 
 下面，就来看看Flex如何实现，从1个点到9个点的布局。你可以到[codepen](https://codepen.io/LandonSchropp/pen/KpzzGo)查看Demo。
 
-![img](image/bg2015071329.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071329.png)
 
 如果不加说明，本节的HTML模板一律如下。
 
@@ -339,7 +339,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 
 首先，只有左上角1个点的情况。Flex布局默认就是首行左对齐，所以一行代码就够了。
 
-![img](image/bg2015071301.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071301.png)
 
 > ```css
 > .box {
@@ -349,7 +349,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 
 设置项目的对齐方式，就能实现居中对齐和右对齐。
 
-![img](image/bg2015071302.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071302.png)
 
 > ```css
 > .box {
@@ -358,7 +358,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 > }
 > ```
 
-![img](image/bg2015071303.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071303.png)
 
 > ```css
 > .box {
@@ -369,7 +369,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 
 设置交叉轴对齐方式，可以垂直移动主轴。
 
-![img](image/bg2015071304.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071304.png)
 
 > ```css
 > .box {
@@ -378,7 +378,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 > }
 > ```
 
-![img](image/bg2015071305.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071305.png)
 
 > ```css
 > .box {
@@ -388,7 +388,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 > }
 > ```
 
-![img](image/bg2015071306.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071306.png)
 
 > ```css
 > .box {
@@ -398,7 +398,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 > }
 > ```
 
-![img](image/bg2015071307.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071307.png)
 
 > ```css
 > .box {
@@ -412,7 +412,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 
 ---
 
-![img](image/bg2015071308.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071308.png)
 
 > ```css
 > .box {
@@ -421,7 +421,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 > }
 > ```
 
-![img](image/bg2015071309.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071309.png)
 
 > ```css
 > .box {
@@ -431,7 +431,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 > }
 > ```
 
-![img](image/bg2015071310.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071310.png)
 
 > ```css
 > .box {
@@ -442,7 +442,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 > }
 > ```
 
-![img](image/bg2015071311.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071311.png)
 
 > ```css
 > .box {
@@ -453,7 +453,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 > }
 > ```
 
-![img](image/bg2015071312.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071312.png)
 
 > ```css
 > .box {
@@ -465,7 +465,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 > }
 > ```
 
-![img](image/bg2015071313.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071313.png)
 
 > ```css
 > .box {
@@ -482,7 +482,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 
 ---
 
-![img](image/bg2015071314.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071314.png)
 
 > ```css
 > .box {
@@ -502,7 +502,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 
 ---
 
-![img](image/bg2015071315.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071315.png)
 
 > ```css
 > .box {
@@ -513,7 +513,7 @@ Webkit 内核的浏览器，必须加上`-webkit`前缀。
 > }
 > ```
 
-![img](image/bg2015071316.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071316.png)
 
 HTML代码如下。
 
@@ -550,7 +550,7 @@ CSS代码如下。
 
 ---
 
-![img](image/bg2015071317.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071317.png)
 
 > ```css
 > .box {
@@ -560,7 +560,7 @@ CSS代码如下。
 > }
 > ```
 
-![img](image/bg2015071318.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071318.png)
 
 > ```css
 > .box {
@@ -571,7 +571,7 @@ CSS代码如下。
 > }
 > ```
 
-![img](image/bg2015071319.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071319.png)
 
 HTML代码如下。
 
@@ -618,7 +618,7 @@ CSS代码如下。
 
 ---
 
-![img](image/bg2015071320.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071320.png)
 
 > ```css
 > .box {
@@ -637,7 +637,7 @@ CSS代码如下。
 
 最简单的网格布局，就是平均分布。在容器里面平均分配空间，跟上面的骰子布局很像，但是需要设置项目的自动缩放。
 
-![img](image/bg2015071321.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071321.png)
 
 HTML代码如下。
 
@@ -667,7 +667,7 @@ CSS代码如下。
 
 某个网格的宽度为固定的百分比，其余网格平均分配剩余的空间。
 
-![img](image/bg2015071322.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071322.png)
 
 HTML代码如下。
 
@@ -711,7 +711,7 @@ HTML代码如下。
 
 [圣杯布局](https://en.wikipedia.org/wiki/Holy_Grail_(web_design))（Holy Grail Layout）指的是一种最常见的网站布局。页面从上到下，分成三个部分：头部（header），躯干（body），尾部（footer）。其中躯干又水平分成三栏，从左到右为：导航、主栏、副栏。
 
-![img](image/bg2015071323.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071323.png)
 
 HTML代码如下。
 
@@ -783,7 +783,7 @@ CSS代码如下。
 
 我们常常需要在输入框的前方添加提示，后方添加按钮。
 
-![img](image/bg2015071324.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071324.png)
 
 HTML代码如下。
 
@@ -813,7 +813,7 @@ CSS代码如下。
 
 有时，主栏的左侧或右侧，需要添加一个图片栏。
 
-![img](image/bg2015071325.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071325.png)
 
 HTML代码如下。
 
@@ -847,7 +847,7 @@ CSS代码如下。
 
 有时，页面内容太少，无法占满一屏的高度，底栏就会抬高到页面的中间。这时可以采用Flex布局，让底栏总是出现在页面的底部。
 
-![img](image/bg2015071326.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071326.png)
 
 HTML代码如下。
 
@@ -879,7 +879,7 @@ CSS代码如下。
 
 每行的项目数固定，会自动分行。
 
-![img](image/bg2015071330.png)
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/bg2015071330.png)
 
 CSS的写法。
 

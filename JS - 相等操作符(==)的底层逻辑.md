@@ -7,7 +7,7 @@
 
 上面的表格的意思就是两两互相比较，Object、String、Number、Boolean根据以下顺序进行转换为相同类型后再进行比较。
 
-![image-20221215182431772](image/image-20221215182431772.png)
+![image-20221215182431772](https://gitee.com/letefly/NoteImages/raw/master/img/image-20221215182431772.png)
 
 ```js
 [] == true //结果为false

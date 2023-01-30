@@ -10,13 +10,13 @@
 - 虚拟表：@todo
 - 组件表：@todo
 
-![image-20211231143941289](image/image-20211231143941289.png)
+![image-20211231143941289](https://gitee.com/letefly/NoteImages/raw/master/img/image-20211231143941289.png)
 
 表的命名遵循SQL命名规则
 
 表级别：@todo
 
-![image-20211231144649914](image/image-20211231144649914.png)
+![image-20211231144649914](https://gitee.com/letefly/NoteImages/raw/master/img/image-20211231144649914.png)
 
 ## 1.字段设计
 
@@ -24,7 +24,7 @@
 
 ### 1.1表字段设计
 
-![image-20211231161425136](image/image-20211231161425136.png)
+![image-20211231161425136](https://gitee.com/letefly/NoteImages/raw/master/img/image-20211231161425136.png)
 
 字段修改和新增的部分逻辑和SQL相似，其中字段英文名就是对应数据库表中的字段名；数据的类型涵盖绝大部分所需的数据类型；
 
@@ -42,13 +42,13 @@
 
 **模板定义**：@todo
 
-![image-20211231161929439](image/image-20211231161929439.png)
+![image-20211231161929439](https://gitee.com/letefly/NoteImages/raw/master/img/image-20211231161929439.png)
 
 ### 1.2关系字段设计
 
 ---
 
-![image-20211231174311405](image/image-20211231174311405.png)
+![image-20211231174311405](https://gitee.com/letefly/NoteImages/raw/master/img/image-20211231174311405.png)
 
 #### 1.2.1选择关系
 
@@ -87,7 +87,7 @@
 
 ---
 
-![image-20211231171508187](image/image-20211231171508187.png)
+![image-20211231171508187](https://gitee.com/letefly/NoteImages/raw/master/img/image-20211231171508187.png)
 
 - 新增辅表，选择辅表名称
 - 设置辅表显示的条件（可选）
