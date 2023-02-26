@@ -348,7 +348,7 @@ console.log(this.$el.textContent) // => '已更新'
 
 ## 查看所有路由信息
 
-打印router
+打印`$router`，`options`里面只能看到**静态的路由**，通过`addRouters`添加的路由在`matcher`-`addRouters`-`[Scopes]`里面的o或者i中。
 
 ## 防止用户未登录直接修改地址路径来访问页面进行拦截功能实现
 
@@ -699,6 +699,116 @@ export default {
 </script>
 
 ```
+
+## vue-ls
+
+[官方网址](https://www.npmjs.com/package/vue-ls) | 
+
+### **作用**
+
+Vue-ls 是 Vue 的一个插件，用于操作 Local Storage(本地存储)、Session Storage(会话存储)、Memory(内存存储)。
+
+### 使用
+
+```js
+import Vue from 'vue'
+import Storage from 'vue-ls'
+
+// vue-ls 的配置
+const storageOptions = {
+    namespace: 'vue_',   // key 键的前缀（随便起）
+  	name: 'ls',          // 变量名称（随便起） 使用方式：Vue.变量名称 或 this.$变量名称
+  	storage: 'local'     // 作用范围：local、session、memory
+}
+
+Vue.use(Storage, storageOptions)
+```
+
+```js
+// login.vue
+methods: {
+  setKey () {
+    this.$ls.set('name', 'cez')
+  }
+}
+```
+
+结果：![img](https://gitee.com/letefly/NoteImages/raw/master/img/2023/02/20200821121151187.png)
+
+### API
+
+#### **Vue.ls.get (name, def)**
+
+- 作用：获取存储中的 key
+- name：要获取的 key；
+- def：默认为 null。如果 key 不存在，则返回 def。
+
+```js
+methods: {
+    getKey () {
+      // age 和 age2 都不存在
+      const age = this.$ls.get('age')
+      const age2 = this.$ls.get('age2', 22)
+      console.log(age)    // null
+      console.log(age2)   // 22
+    }
+  }
+```
+
+#### **Vue.ls.set (name, value, expire)**
+
+- 作用：设置一个 key，并且可以设置有效时间。
+- expire：默认为 null。name 的有效时间，单位为毫秒。
+
+```js
+methods: {
+  setKey () {
+     this.$ls.set('age', 22)   // age 的有效时间为永久，除非自动清除
+     this.$ls.set('name', 'cez', 3000)   // name 的有效时间为 3s，3s 后为 null
+  }
+}
+```
+
+**Vue.ls.remove (name)**
+
+- 作用：从存储中删除某一个 key，成功返回 true，否则返回 false。
+
+```js
+methods: {
+    removeKey () {
+        const age = this.$ls.remove('age')
+        console.log(age)   // undefined：不管删除成功还是删除失败都会返回 undefined，和官方解析不一样，不知道为什么？？
+    }
+}
+```
+
+官方解析：
+
+![img](https://gitee.com/letefly/NoteImages/raw/master/img/2023/02/20200821142703252.png)
+
+#### **Vue.ls.clear ( )**
+
+- 作用：清空所有 key。
+
+```js
+methods: {
+    clearKey () {
+        this.$ls.clear()
+    }
+}
+```
+
+#### **Vue.ls.on (name, callback)**
+
+- 作用：设置侦听器，监听 key，若发生变化时，就会触发回调函数 callback。
+- callback 接受三个参数：
+- newValue：存储中的新值
+- oldValue：存储中的旧值
+- url：修改来自选项卡的 url
+
+#### **Vue.ls.off (name, callback)**
+
+- 作用：删除设置的侦听器
 
 # 问题
 
