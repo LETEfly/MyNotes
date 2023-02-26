@@ -2,5 +2,10 @@
 chcp 65001
 git pull
 git add *
+<<<<<<< HEAD
 git commit -m '±Ê¼Ç¸üÐÂ'
 git push
+=======
+git commit -m "ç¬”è®°æ›´æ–°"
+git push
+>>>>>>> d2ab1e012837e781655c590d471e4976f8655a26
