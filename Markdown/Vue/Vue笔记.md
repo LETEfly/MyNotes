@@ -372,7 +372,32 @@ router.beforeEach((to, from, next) => {
 })
 ```
 
-# Webpack
+# Vue CLI
+
+[官方指南](https://cli.vuejs.org/zh/guide/)
+
+## @vue/cli
+
+CLI (`@vue/cli`) 是Vue CLI的组成部分之一，是一个全局安装的 npm 包，提供了终端里的 `vue` 命令。它可以通过 `vue create` 快速搭建一个新项目，或者直接通过 `vue serve` 构建新想法的原型。你也可以通过 `vue ui` 通过一套图形化界面管理你的所有项目。
+
+## Vue引入Scss全局变量
+
+在vue.config.js配置如下：
+
+```js
+css: {
+    loaderOptions: {
+      //scss引入全局变量
+      // 不同 sass-loader 版本对应关键字， v8-: data   v8: prependData   v10+: additionalData
+      sass: {
+        data: `@import "@/style/variables.scss";`
+      },
+      scss: {
+        data: `@import "@/style/variables.scss";`
+      }
+    }
+  },
+```
 
 ## Process.env.NODE_ENV
 
