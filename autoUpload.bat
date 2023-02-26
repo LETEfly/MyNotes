@@ -1,6 +1,6 @@
-::更改为UTF-8编码	
+::杞彉涓簎tf-8
 chcp 65001
 git pull
 git add *
-git commit -m "笔记更新"
+git commit -m "绗旇鏇存柊"
 git push
