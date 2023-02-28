@@ -1,6 +1,466 @@
 # 基础
 
+## 组件通信方式
+
+---
+
+### props/@on+$emit
+
+通过 `props` 可以把父组件的消息传递给子组件：
+
+```js
+// parent.vue    
+<child :title="title"></child>
+ 
+// child.vue
+props: {
+    title: {
+        type: String,
+        default: '',
+    }
+}
+```
+
+这样一来 `this.title` 就直接拿到从父组件中传过来的 `title` 的值了。注意，不应该在子组件内部直接改变 `prop`。而通过 `@on+$emit` 组合可以实现子组件给父组件传递信息。
+
+```js
+// parent.vue
+<child @changeTitle="changeTitle"></child>
+ 
+// child.vue
+this.$emit('changeTitle', 'bubuzou.com')
+```
+
+###  $attrs/$listeners
+
+`ue_2.4` 中新增的 `$attrs/$listeners` 可以进行跨级的组件通信。`$attrs` 包含了父级作用域中不作为 `prop` 的属性绑定（`class` 和 `style` 除外）：
+
+```js
+// 父组件 index.vue
+<list class="list-box" title="标题" desc="描述" :list="list"></list>
+ 
+// 子组件 list.vue
+props: {
+    list: [],
+},
+mounted() {
+    console.log(this.$attrs)  // {title: "标题", desc: "描述"}
+}
+```
+
+在上面的父组件 index.vue 中我们给子组件 list.vue 传递了4个参数，但是在子组件内部 props 里只定义了一个 list，那么此时 this.$attrs 的值是什么呢？首先要去除 props 中已经绑定了的，然后再去除 class 和 style，最后剩下 title 和 desc 结果和打印的是一致的。基于上面代码的基础上，我们在给 list.vue 中加一个子组件：
+
+```js
+// 子组件 list.vue
+<detail v-bind="$attrs"></detial>
+ 
+// 孙子组件 detail.vue
+// 不定义props，直接打印 $attrs
+mounted() {
+    console.log(this.$attrs)  // {title: "标题", desc: "描述"}
+}
+```
+
+在子组件中我们定义了一个 `v-bind="$attrs"` 可以把父级传过来的参数，去除 `props`、`class` 和 `style` 之后剩下的继续往下级传递，这样就实现了跨级的组件通信。
+
+$attrs 是可以进行跨级的参数传递，实现父到子的通信；同样的，通过 $listeners 用类似的操作方式可以进行跨级的事件传递，实现**子到父**的通信。$listeners 包含了父作用域中不含` .native` 修饰的 v-on 事件监听器，通过 v-on="$listeners" 传递到子组件内部。
+
+```js
+// 父组件 index.vue
+<list @change="change" @update.native="update"></list>
+ 
+// 子组件 list.vue
+<detail v-on="$listeners"></detail>
+ 
+// 孙子组件 detail.vue
+mounted() {
+    this.$listeners.change()
+    this.$listeners.update() // TypeError: this.$listeners.update is not a function
+}
+```
+
+### provide/inject
+
+`provide/inject` 组合以允许一个祖先组件向其所有子孙后代注入一个依赖，可以注入属性和方法，从而实现跨级父子组件通信。在开发高阶组件和组件库的时候尤其好用。
+
+```js
+// 父组件 index.vue
+data() {
+    return {
+        title: 'bubuzou.com',
+    }
+}
+provide() {
+    return {
+        detail: {
+            title: this.title,
+            change: (val) => {
+                console.log( val )
+            }
+        }
+    }
+}
+ 
+// 孙子组件 detail.vue
+inject: ['detail'],
+mounted() {
+    console.log(this.detail.title)  // bubuzou.com
+    this.detail.title = 'hello world'  // 虽然值被改变了，但是父组件中 title 并不会重新渲染
+    this.detail.change('改变后的值')  // 执行这句后将打印：改变后的值 
+}
+```
+
+> `provide` 和 `inject` 的绑定对于原始类型来说并不是可响应的。这是刻意为之的。然而，如果你传入了一个可监听的对象，那么其对象的 property 还是可响应的。这也就是为什么在孙子组件中改变了 `title`，但是父组件不会重新渲染的原因。
+
+### EventBus
+
+EventBus能进行**兄弟组件之间的通信**，甚至任意2个组件间通信。利用 `Vue` 实例实现一个 `EventBus` 进行信息的发布和订阅，可以实现在任意2个组件之间通信。有两种写法都可以初始化一个 `eventBus` 对象：
+
+写法1：通过导出一个 Vue 实例，然后再需要的地方引入
+
+```js
+// eventBus.js
+import Vue from 'vue'
+export const EventBus = new Vue()
+
+//使用 EventBus 订阅和发布消息：
+import {EventBus} from '../utils/eventBus.js'
+
+// 订阅处
+EventBus.$on('update', val => {})
+
+// 发布处
+EventBus.$emit('update', '更新信息')
+```
+
+写法2：在 main.js 中初始化一个全局的事件总线
+
+```js
+// main.js
+Vue.prototype.$eventBus = new Vue()
+
+// 需要订阅的地方
+this.$eventBus.$on('update', val => {})
+
+// 需要发布信息的地方
+this.$eventBus.$emit('update', '更新信息')
+```
+
+如果想要移除事件监听，可以这样来：
+
+```js
+this.$eventBus.$off('update', {})
+```
+
+上面介绍了两种写法，推荐使用第二种全局定义的方式，可以避免在多处导入 EventBus 对象。这种组件通信方式只要订阅和发布的顺序得当，且事件名称保持唯一性，理论上可以在任何 2 个组件之间进行通信，相当的强大。但是方法虽好，可不要滥用，建议只用于简单、少量业务的项目中**，如果在一个大型繁杂的项目中无休止的使用该方法，将会导致项目难以维护**。
+
+### Vuex进行全局的数据管理
+
+Vuex 是一个专门服务于 Vue.js 应用的状态管理工具。适用于中大型应用。Vuex 中有一些专有概念需要先了解下：
+
+- State：用于数据的存储，是 store 中的唯一数据源；
+
+- Getter：类似于计算属性，就是对 State 中的数据进行二次的处理，比如筛选和对多个数据进行求值等；
+- Mutation：类似事件，是改变 Store 中数据的唯一途径，只能进行同步操作；
+- Action：类似 Mutation，通过提交 Mutation 来改变数据，而不直接操作 State，可以进行异步操作；
+- Module：当业务复杂的时候，可以把 store 分成多个模块，便于维护；
+
+对于这几个概念有各种对应的 map 辅助函数用来简化操作，比如 mapState，如下三种写法其实是一个意思，都是为了从 state 中获取数据，并且通过计算属性返回给组件使用。
+
+```js
+computed: {
+    count() {
+        return this.$store.state.count
+    },
+    ...mapState({
+        count: state => state.count
+    }),
+    ...mapState(['count']),
+},
+```
+
+又比如 `mapMutations`， 以下两种函数的定义方式要实现的功能是一样的，都是要提交一个 `mutation` 去改变 `state` 中的数据：
+
+```js
+methods: {
+    increment() {
+        this.$store.commit('increment')
+    },
+    ...mapMutations(['increment']),
+}
+```
+
+接下来就用一个极简的例子来展示 `Vuex` 中任意2个组件间的状态管理。
+
+```js
+//新建 store.js
+import Vue from 'vue'
+import Vuex from 'vuex'
+Vue.use(Vuex)
+    
+export default new Vuex.Store({
+    state: {
+        count: 0,
+    },
+    mutations: {
+        increment(state) {
+            state.count++
+        },
+        decrement(state) {
+            state.count--
+        }
+    },
+})
+```
+
+```js
+//创建一个带 store 的 Vue 实例
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
+import store from './utils/store'
+    
+new Vue({
+    router,
+    store,
+    render: h => h(App)
+}).$mount('#app')
+```
+
+```vue
+<!--任意组件 A 实现点击递增-->
+<template>
+    <p @click="increment">click to increment：{{count}}</p>
+</template>
+<script>
+import {mapState, mapMutations} from 'vuex'
+export default {
+    computed: {
+        ...mapState(['count'])
+    },
+    methods: {
+        ...mapMutations(['increment'])
+    },
+}
+</script>
+```
+
+```vue
+<!--任意组件 B 实现点击递减-->
+<template>
+    <p @click="decrement">click to decrement：{{count}}</p>
+</template>
+<script>
+import {mapState, mapMutations} from 'vuex'
+export default {
+    computed: {
+        ...mapState(['count'])
+    },
+    methods: {
+        ...mapMutations(['decrement'])
+    },
+}
+</script>
+```
+
+以上只是用最简单的 vuex 配置去实现组件通信，当然真实项目中的配置肯定会更复杂，比如需要对 State 数据进行二次筛选会用到 `Getter`，然后如果需要异步的提交那么需要使用Action，再比如如果模块很多，可以将 store 分模块进行状态管理。
+
+### **Vue.observable实现mini vuex**
+
+这是一个 `Vue2.6` 中新增的 `API`，用来让一个对象可以响应。我们可以利用这个特点来实现一个小型的状态管理器。
+
+```js
+// store.js
+import Vue from 'vue'
+ 
+export const state = Vue.observable({
+    count: 0,
+})
+ 
+export const mutations = {
+    increment() {
+        state.count++
+    }
+    decrement() {
+        state.count--
+    }
+}
+```
+
+```vue
+<!--parent.vue-->
+<template>
+    <p>{{ count }}</p>
+</template>
+<script>
+import { state } from '../store'
+export default {
+    computed: {
+        count() {
+            return state.count
+        }
+    }
+}
+</script>
+```
+
+```js
+// child.vue
+import  { mutations } from '../store'
+export default {
+    methods: {
+        handleClick() {
+            mutations.increment()
+        }
+    }
+}
+```
+
+### children/root
+
+通过给子组件定义 `ref` 属性可以使用 `$refs` 来直接操作子组件的方法和属性。
+
+```vue
+<child ref="list"></child>
+```
+
+比如子组件有一个 `getList` 方法，可以通过如下方式进行调用，实现父到子的通信：
+
+```js
+this.$refs.list.getList()
+```
+
+## 修饰符
+
+---
+
+### 表单修饰符
+
+表单类的修饰符都是和 v-model 搭配使用的，比如：v-model.lazy、v-model-trim 以及 v-model.number 等。
+
+- **.lazy**：对表单输入的结果进行延迟响应，通常和 v-model 搭配使用。正常情况下在 input 里输入内容会在 p 标签里实时的展示出来，但是加上 .lazy 后则需要在输入框失去焦点的时候才触发响应。
+
+```vue
+<input type="text" v-model.lazy="name" />
+<p>{{ name }}</p>
+```
+
+- **.trim**：过滤输入内容的首尾空格，这个和直接拿到字符串然后通过 str.trim() 去除字符串首尾空格是一个意思。
+- **.number**：如果输入的第一个字符是数字，那就只能输入数字，否则他输入的就是普通字符串。
+
+### 事件修饰符
+
+`Vue` 的事件修饰符是专门为 `v-on` 设计的，可以这样使用：`@click.stop="handleClick"`，还能串联使用：`@click.stop.prevent="handleClick"`。
+
+```vue
+<div @click="doDiv">
+    click div
+    <p @click="doP">click p</p>
+</div>
+```
+
+- **.stop**：阻止事件冒泡，和原生 event.stopPropagation() 是一样的效果。如上代码，当点击 p 标签的时候，div 上的点击事件也会触发，加上 .stop 后事件就不会往父级传递，那父级的事件就不会触发了。
+- **.prevent**：阻止默认事件，和原生的 event.preventDefault() 是一样的效果。比如一个带有 href 的链接上添加了点击事件，那么事件触发的时候也会触发链接的跳转，但是加上 .prevent 后就不会触发链接跳转了。
+- **.capture**：默认的事件流是：捕获阶段-目标阶段-冒泡阶段，即事件从最具体目标元素开始触发，然后往上冒泡。而加上 .capture 后则是反过来，外层元素先触发事件，然后往深层传递。
+- **.self**：只触发自身的事件，不会传递到父级，和 .stop 的作用有点类似。
+- **.once**：只会触发一次该事件。
+- **.passive**：当页面滚动的时候就会一直触发 onScroll 事件，这个其实是存在性能问题的，尤其是在移动端，当给他加上 .passive 后触发的就不会那么频繁了。
+- **.native**：现在在组件上使用 v-on 只会监听自定义事件 (组件用 $emit 触发的事件)。如果要监听根元素的原生事件，可以使用 .native 修饰符，比如如下的 el-input，如果不加 .native 当回车的时候就不会触发 search 函数。
+
+```vue
+<el-input type="text" v-model="name" @keyup.enter.native="search"></el-input>
+```
+
+> 串联使用事件修饰符的时候，需要注意其顺序，同样2个修饰符进行串联使用，顺序不同，结果大不一样。 `@click.prevent.self` 会阻止所有的点击事件，而 `@click.self.prevent` 只会阻止对自身元素的点击。
+
+### **鼠标按钮修饰符**
+
+- `.left`：鼠标左键点击；
+- `.right`：鼠标右键点击；
+- `.middle`：鼠标中键点击；
+
+### **键盘按键修饰符**
+
+`Vue` 提供了一些常用的按键码：
+
+- `.enter`
+- `.tab`
+- `.delete` (捕获“删除”和“退格”键)
+- `.esc`
+- `.space`
+- `.up`
+- `.down`
+- `.left`
+- `.right`
+
+另外，你也可以直接将 `KeyboardEvent.key` 暴露的任意有效按键名转换为 `kebab-case` 来作为修饰符，比如可以通过如下的代码来查看具体按键的键名是什么：
+
+```vue
+<input @keyup="onKeyUp">
+ 
+onKeyUp(event) {
+    console.log(event.key)  // 比如键盘的方向键向下就是 ArrowDown
+}
+```
+
+### .exact修饰符
+
+`.exact` 修饰符允许你控制由精确的系统修饰符组合触发的事件。
+
+```vue
+<!-- 即使 Alt 或 Shift 被一同按下时也会触发 -->
+<button v-on:click.ctrl="onClick">A</button>
+ 
+<!-- 有且只有 Ctrl 被按下的时候才触发 -->
+<button v-on:click.ctrl.exact="onCtrlClick">A</button>
+ 
+<!-- 没有任何系统修饰符被按下的时候才触发 -->
+<button v-on:click.exact="onClick">A</button>
+```
+
+### .sync/$emit('update:value)修饰符
+
+`.sync` 修饰符常被用于子组件更新父组件数据。直接看下面的代码：
+
+```vue
+// parent.vue
+<child :title.sync="title"></child>
+ 
+// child.vue
+this.$emit('update:title', 'hello')
+```
+
+> 注意带有 .sync 修饰符的 v-bind 不能和表达式一起使用
+
+如果需要设置多个 `prop`，比如：
+
+```vue
+<child :name.sync="name" :age.sync="age" :sex.sync="sex"></child>
+```
+
+可以通过 `v-bind.sync` 简写成这样：
+
+```vue
+<child v-bind.sync="person"></child>
+ 
+person: {
+    name: 'bubuzou',
+    age: 21,
+    sex: 'male',
+}
+```
+
+`Vue` 内部会自行进行解析把 `person` 对象里的每个属性都作为独立的 `prop` 传递进去，各自添加用于更新的 `v-on` 监听器。而从子组件进行更新的时候还是保持不变，比如：
+
+```js
+this.$emit('update:name', 'hello')
+```
+
+
+
 ## Cli2更换浏览器图标(favicon)的方式
+
+---
 
 把准备好的图片文件放到根目录，修改 build 文件夹下 webpack.prod.conf.js （生产环境）和 webpack.dev.conf.js（开发环境） 文件：
 
@@ -20,6 +480,8 @@ new HtmlWebpackPlugin({
 
 ## V-model的修饰符
 
+---
+
 [v-model的修饰符 - 简书 (jianshu.com)](https://www.jianshu.com/p/2ad32bb94cc2)
 
 ####  v-model.lazy
@@ -35,6 +497,8 @@ new HtmlWebpackPlugin({
 自动过滤输入的首尾空格
 
 ## 数据双向绑定 
+
+---
 
 ```vue
 v-bind:value.sync
@@ -212,6 +676,8 @@ this.$emit('update:foo', payload)
 
 ## Require与Import
 
+---
+
 [vue中require与import之间的区别_CaseyWei-CSDN博客](https://blog.csdn.net/caseywei/article/details/90710749?utm_term=%E5%9C%A8vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84require&utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~sobaiduweb~default-0-90710749&spm=3001.4430)
 
 - require的基本语法
@@ -234,8 +700,6 @@ obj.a()  //666
 ```
 
 【注】:本质上是将要导出的对象赋值给module这个的对象的export属性，在其他文件中通过require这个方法访问该属性
-
-
 
 - import的基本语法
   核心概念：导出的对象必须与模块中的值一一对应，换一种说法就是**导出的对象与整个模块进行解构赋值**。对的，你没有听错。抓住重点，解构赋值！！！！！
@@ -276,6 +740,8 @@ var a = require(a() + '/ab.js')
 
 ## This的指向问题
 
+---
+
 对于使用function定义的函数，它里面使用的**this是由它的(执行时的)直接调用者决定**。如果没有**直接调用者**，在非严格模式下，this指向**window**。
 
 **箭头函数没有自己的this**，在它里面使用的this指向的是**定义箭头函数时(注意：并非执行时)**所处的**宿主对象**。
@@ -302,6 +768,8 @@ showMessage1里使用了匿名函数，this指向window，showMessage2里定义�
 > 为了保留this指向，在一些内层函数内（如封装的请求），他的this指向并不是当前的Vue实例，所以要定义一个值保存一下this，在需要访问调用Vue实例的时候使用
 
 ## This.$nextTick(callback)--在更新Dom后再触发的回调
+
+---
 
 官方解释：
 
@@ -348,9 +816,13 @@ console.log(this.$el.textContent) // => '已更新'
 
 ## 查看所有路由信息
 
+---
+
 打印`$router`，`options`里面只能看到**静态的路由**，通过`addRouters`添加的路由在`matcher`-`addRouters`-`[Scopes]`里面的o或者i中。
 
 ## 防止用户未登录直接修改地址路径来访问页面进行拦截功能实现
+
+---
 
 在入口文件main.js判断是否存在用户的token，若不存在则跳转到登录页面：
 
@@ -378,9 +850,13 @@ router.beforeEach((to, from, next) => {
 
 ## @vue/cli
 
+---
+
 CLI (`@vue/cli`) 是Vue CLI的组成部分之一，是一个全局安装的 npm 包，提供了终端里的 `vue` 命令。它可以通过 `vue create` 快速搭建一个新项目，或者直接通过 `vue serve` 构建新想法的原型。你也可以通过 `vue ui` 通过一套图形化界面管理你的所有项目。
 
 ## Vue引入Scss全局变量
+
+---
 
 在vue.config.js配置如下：
 
@@ -400,6 +876,8 @@ css: {
 ```
 
 ## Process.env.NODE_ENV
+
+---
 
 在node中，有全局变量process表示的是当前的node进程。
 process.env包含着关于系统环境的信息，但是process.env中并不存在NODE_ENV这个东西。
@@ -534,6 +1012,8 @@ var component = new Component() // => "hello from mixin!"
 
 ##  选项合并
 
+---
+
 当组件和混入对象含有同名选项时，这些选项将以恰当的方式进行“合并”。
 
 比如，数据对象在内部会进行递归合并，并在发生冲突时以组件数据优先。
@@ -616,6 +1096,8 @@ vm.conflicting() // => "from self"
 
 ## 全局混入
 
+---
+
 混入也可以进行全局注册。使用时格外小心！一旦使用全局混入，它将影响**每一个**之后创建的 Vue 实例。使用恰当时，这可以用来为自定义选项注入处理逻辑。
 
 ```js
@@ -638,6 +1120,8 @@ new Vue({
 请谨慎使用全局混入，因为它会影响每个单独创建的 Vue 实例 (包括第三方组件)。大多数情况下，只应当应用于自定义选项，就像上面示例一样。推荐将其作为[插件](https://cn.vuejs.org/v2/guide/plugins.html)发布，以避免重复应用混入。
 
 ## 自定义选项合并策略
+
+---
 
 自定义选项将使用默认策略，即简单地覆盖已有值。如果想让自定义选项以自定义逻辑合并，可以向 `Vue.config.optionMergeStrategies` 添加一个函数：
 
@@ -671,6 +1155,8 @@ Vue.config.optionMergeStrategies.vuex = function (toVal, fromVal) {
 
 ##  不足
 
+---
+
 在 Vue 2 中，mixin 是将部分组件逻辑抽象成可重用块的主要工具。但是，他们有几个问题：
 
 - Mixin 很容易发生冲突：因为每个 mixin 的 property 都被合并到同一个组件中，所以为了避免 property 名冲突，你仍然需要了解其他每个特性。
@@ -681,6 +1167,8 @@ Vue.config.optionMergeStrategies.vuex = function (toVal, fromVal) {
 # 组件
 
 ## v-resize
+
+---
 
 [GitHub - theshying/v-resize: 🎉实时监听元素width/height属性变化的自定义vue指令](https://github.com/theshying/v-resize)
 
@@ -726,6 +1214,8 @@ export default {
 ```
 
 ## vue-ls
+
+---
 
 [官方网址](https://www.npmjs.com/package/vue-ls) | 
 
@@ -839,6 +1329,8 @@ methods: {
 
 ## 点击button按钮页面自动刷新问题
 
+---
+
 ###  问题描述：
 
 在vue中使用原生的button，绑定点击事件后点击按钮会自动刷新页面。
@@ -857,6 +1349,8 @@ methods: {
 # 其它
 
 ##  在Vue中，给数组的对象原型新增方法
+
+---
 
 首先创建一个js，并写入相应的代码，这里要注意的是不能使用箭头函数，因为箭头函数和匿名函数的this指向是不一样的，详情参见本文的“vue中this指向问题”
 

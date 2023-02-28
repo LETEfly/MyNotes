@@ -244,6 +244,18 @@ Ext库Ext.CompositeElementLite类的 [clear](http://docs.sencha.com/#method-Ext.
 
 - "abc".split('') 输出同上
 
+
+## .filter(Boolean)
+
+---
+
+```js
+['',0,false,'x',1,true].filter(Boolean)
+//Boolean是一个函数，传入一个值，Boolean函数会判断并返回Boolean值
+//如：Boolean('') -> false
+//所以上面的表达式的结果为：['x', 1, true]
+```
+
 #  对象
 
 ## hasOwnProperty()--检查对象是否有该属性
@@ -624,6 +636,15 @@ sortListByKey(Arr, key) {
 
 ```js
 val.replace(/<[^>]+>/g, "")
+```
+
+## Split通过多个符号拆分数组
+
+---
+
+```js
+'(false||(1==3&&1==1))'.split(/([!()])|(&&)|(\|\|)/g).filter(Boolean)
+//结果：['(', 'false', '||', '(', '1==3', '&&', '1==1', ')', ')']
 ```
 
 # 其它
