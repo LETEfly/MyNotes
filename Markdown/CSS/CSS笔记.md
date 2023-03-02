@@ -1,4 +1,104 @@
+## 属性选择器
+
+---
+
+属性选择器的权重是0010
+
+**写法1 某某[属性]**
+
+```css
+/*选择到a标签且有title属性的*/
+a[title]{
+	background: yellow;
+}
+
+a[lang][target]{
+	background: yellow;
+}
+```
+
+**写法2: 某某[属性=属性值]**
+
+```css
+/*选择到有某某标签有指定属性且属性值必须一摸一样的也有的多一个空格都不行*/
+a[lang="zh"]{
+	background: yellow;
+}
+a[title="this is a link"]{
+	background: yellow;
+}
+/* class名字是item的,且有属性lang且属性值必须一模一样是zh-cn的 */
+.item[lang="zh-cn"]{
+	background: yellow;
+}
+/* id是last且有title属性且有class属性,属性值只能是links的变 */
+#last[title][class="links"]{
+	background: yellow;
+}
+```
+
+**写法3: 某某[属性^=属性值]**
+
+```css
+/* a标签有class属性且属性值是li开头的 */
+a[class^="li"]{
+	background-color: yellow;
+} 
+
+a[title^="this"][lang]{
+	background-color: yellow;
+} 
+```
+
+**写法4 某某[属性$=属性值]**
+
+```CSS
+/* a标签有class属性且属性值结尾是t的 */
+a[class$="t"]{
+	background-color: yellow;
+}  
+
+a[href$=".pdf"]{
+	background-color: yellow;
+}
+a[href$=".doc"]{
+	background-color: red;
+}
+a[href$=".png"]{
+	background-color: green;
+}
+```
+
+ **写法5 某某[属性*=属性值]**
+
+```CSS
+/* 选择到a标签且有href属性且只要有字母b就可以 */
+a[href*="b"]{
+	background-color: green;
+}
+```
+
+**写法6 某某[属性~=属性值]**
+
+```CSS
+/* 选择到的是a标签且有class属性,且属性值有完整的itme词的变 */
+a[class~="item"]{
+	background-color: green;
+}
+```
+
+**写法7 某某[属性|=属性值]**
+
+```CSS
+/* 这个是选择到有a标签,且有属性title,且属性值只有1个是link的或者属性值有多个但是得是link-开头的变 */
+a[title|="link"]{
+	background-color: green;
+}
+```
+
 ## 深度选择器  /deep/ 
+
+---
 
 需求：在某一组件中想要修改全局组件的样式（全局样式），但又不想直接修改全局组件的样式，而是仅在当前组件引用时更改，如：一组件要更改element对话框的内容（.el-dialog .el-dialog__body）的高度，但又不能影响到其它组件的正常使用。这种时候就需要用到/deep/.
 
@@ -11,6 +111,8 @@
 注意是在scope里更改。
 
 ## background-clip
+
+---
 
 Clip 的意思为修剪，那么从字面意思上理解，`background-clip` 的意思即是背景裁剪。`background-clip` 的作用就是设置元素的背景（背景图片或颜色）的填充规则。
 
@@ -28,6 +130,8 @@ Clip 的意思为修剪，那么从字面意思上理解，`background-clip` 的
 ```
 
 ## 文字透视与渐变效果
+
+---
 
 `-webkit-background-clip:text;`：让背景裁剪到文本区，即除文本以外的区域是看不到背景的效果的；
 
@@ -56,6 +160,8 @@ Clip 的意思为修剪，那么从字面意思上理解，`background-clip` 的
 
 ## 隐藏input number的箭头
 
+---
+
 ```javascript
 .input_number{
     input::-webkit-outer-spin-button,
@@ -68,4 +174,3 @@ Clip 的意思为修剪，那么从字面意思上理解，`background-clip` 的
 }
 ```
 
-## 
