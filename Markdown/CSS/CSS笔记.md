@@ -174,3 +174,28 @@ Clip 的意思为修剪，那么从字面意思上理解，`background-clip` 的
 }
 ```
 
+## white-space
+
+---
+
+- **pre**	空白会被浏览器保留。其行为方式类似 HTML 中的 `<pre>` 标签。
+- **nowrap**	文本不会换行，文本会在在同一行上继续，直到遇到`<br>`标签为止。
+- **pre-wrap**	保留空白符序列，但是正常地进行换行。
+- **pre-line**	合并空白符序列，但是保留换行符。
+- **inherit**	规定应该从父元素继承 white-space 属性的值。
+
+## 修改自动填充功能的默认样式
+
+---
+
+在谷歌浏览器上面登录页面时，如果之前记住了帐号密码的话，那么可以自由的选择登陆的账号，谷歌浏览器会自动自动填充密码， 而你无需再输入密码 。但是填充之后，默认的输入框样式却被修改了,那么如何去修改呢？
+
+```css
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #464646 inset !important;
+    box-shadow: 0 0 0 1000px #464646 inset !important;
+    -webkit-text-fill-color: #f0f0f0;
+    caret-color: #fff;
+｝
+```
+

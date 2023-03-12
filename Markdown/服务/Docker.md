@@ -257,6 +257,23 @@ docker import [OPTIONS] file|URL|- [REPOSITORY[:TAG]]
 
 ## 常用命令
 
+### 服务操作
+
+```shell
+#启动docker
+systemctl start docker
+#停止dokcer
+systemctl stop docker
+#查看docker状态
+systemctl status docker 
+#重启docker
+systemctl restart docker
+#设置docker 开机自启
+systemctl enable docker
+#查看docker 版本
+docker version
+```
+
 ### 拉取镜像
 
 ```
@@ -289,8 +306,6 @@ docker rmi <IMAGE>
 #删除所有镜像
 docker rmi  $(docker images -q)
 ```
-
-
 
 ### 新增容器
 
